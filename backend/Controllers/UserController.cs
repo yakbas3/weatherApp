@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using System.Collections.Generic;
+using System.Security.Claims;
 using System.Linq;
 using System.Threading.Tasks;
 using WeatherAppApi.Data;
@@ -26,6 +26,45 @@ namespace WeatherAppApi.Controllers
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
+        }
+
+        [HttpPut("update-city")]
+        [Authorize]
+        public async Task<IActionResult> UpdateCity([FromBody] UpdateCityModel model)
+        {
+            if (string.IsNullOrEmpty(model.CityName))
+            {
+                return BadRequest("CityName is required");
+            }
+
+            var username = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Username == username);
+
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            user.DefaultCityName = model.CityName;
+            _context.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Users.Any(e => e.Username == username))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
         // GET: api/Users/{username}
@@ -102,4 +141,9 @@ namespace WeatherAppApi.Controllers
             return NoContent();
         }
     }
+
+        public class UpdateCityModel
+        {
+            public string CityName { get; set; }
+        }
 }

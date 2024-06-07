@@ -20,6 +20,9 @@ const AdminPanel = () => {
       <div>
       <h2>Admin Panel</h2>
       <p>This is the admin panel where you can manage the application.</p>
+      <Button component={Link} to="/home" variant="contained" color="primary" style={{ marginRight: '10px' }}>
+        Home
+      </Button>
       <Button component={Link} to="/admin/users" variant="contained" color="secondary">
         <div>User Administration</div>
       </Button>

@@ -138,6 +138,15 @@ const getUserLogs = async (authTokens) => {
   return response.data;
 };
 
+const updateUserCity = async (cityName, authTokens) => {
+  const response = await axios.put(`${API_URL}/Users/update-city`, { cityName }, {
+    headers: {
+      Authorization: `Bearer ${authTokens}`,
+    },
+  });
+  return response.data;
+};
+
 export { 
   login, 
   register, 
@@ -161,5 +170,6 @@ export {
   getWeatherDataByCityForWeek,
   getTodayWeather,
   getUserWeatherData,
-  getUserLogs
+  getUserLogs,
+  updateUserCity
  };
