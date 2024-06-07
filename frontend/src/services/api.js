@@ -129,6 +129,15 @@ const getUserWeatherData = async (username) => {
   return response.data;
 };
 
+const getUserLogs = async (authTokens) => {
+  const response = await axios.get(`${API_URL}/UserLogs`, {
+    headers: {
+      Authorization: `Bearer ${authTokens}`,
+    },
+  });
+  return response.data;
+};
+
 export { 
   login, 
   register, 
@@ -151,5 +160,6 @@ export {
   getWeatherDataByCity,
   getWeatherDataByCityForWeek,
   getTodayWeather,
-  getUserWeatherData
+  getUserWeatherData,
+  getUserLogs
  };

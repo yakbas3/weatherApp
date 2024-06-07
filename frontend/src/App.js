@@ -13,6 +13,7 @@ import PrivateRoute from './components/PrivateRoute';
 import NotAuthorized from './components/NotAuthorized';
 import SearchWeather from './components/SearchWeather';
 import NewHome from './components/NewHome';
+import LoginAdministration from './components/LoginAdministration';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/admin/weather" element={<WeatherDataAdministration />} />
           <Route path="/admin/users" element={<UserAdministration />} />
+          <Route path="/admin/userlogs" element={<LoginAdministration />} />
         </Route>
         <Route path="/not-authorized" element={<NotAuthorized />} />
         <Route path="/home" element={<Home />} />

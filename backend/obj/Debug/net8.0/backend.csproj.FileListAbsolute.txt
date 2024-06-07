@@ -44,3 +44,4 @@ C:\Users\yaman\Desktop\weatherApp\backend\bin\Debug\net8.0\Microsoft.IdentityMod
 C:\Users\yaman\Desktop\weatherApp\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\yaman\Desktop\weatherApp\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\yaman\Desktop\weatherApp\backend\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\yaman\Desktop\weatherApp\backend\obj\Debug\net8.0\backend.sourcelink.json

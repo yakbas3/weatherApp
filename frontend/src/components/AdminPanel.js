@@ -26,6 +26,9 @@ const AdminPanel = () => {
       <Button component={Link} to="/admin/weather" variant="contained" color="secondary">
         <div>Weather Data Administration</div>
       </Button>
+      <Button component={Link} to="/admin/userlogs" variant="contained" color="secondary">
+        <div>Logger Administration</div>
+      </Button>
       </div>
       </Box>
     </Layout>

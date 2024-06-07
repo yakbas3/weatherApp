@@ -8,6 +8,7 @@ using System.Text;
 using WeatherAppApi.Data;
 using WeatherAppApi.Models;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace WeatherAppApi.Controllers
 {
@@ -27,7 +28,7 @@ namespace WeatherAppApi.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginModel loginModel)
+        public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
             _logger.LogInformation("Login attempt: {Username}", loginModel.Username);
 
@@ -41,6 +42,18 @@ namespace WeatherAppApi.Controllers
 
             var token = GenerateJwtToken(user);
             _logger.LogInformation("Login successful: {Username}", loginModel.Username);
+
+            // Log the login
+            var userLog = new UserLog
+            {
+                Username = user.Username,
+                LogTime = DateTime.UtcNow,
+                IPAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                Log = "User logged in"
+            };
+            _context.UserLogs.Add(userLog);
+            await _context.SaveChangesAsync();
+
             return Ok(new { Token = token });
         }
 
